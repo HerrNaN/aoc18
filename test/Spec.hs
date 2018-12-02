@@ -2,8 +2,8 @@ import Test.Hspec
 import Test.QuickCheck
 import Control.Exception (evaluate)
 
-import Day01 (day01a, day01b)
-import Day02 (day02a, day02b)
+import Day01
+import Day02
 
 
 main :: IO ()
