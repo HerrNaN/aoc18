@@ -1,7 +1,5 @@
-module Day02
-    ( day02a,
-      day02b
-    ) where
+module Day02 (day02a,day02b) where
+
 import Data.Map (fromListWith, toList)
 import Data.Maybe
 

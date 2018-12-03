@@ -1,7 +1,4 @@
-module Day01
-    ( day01a,
-      day01b
-    ) where
+module Day01 (day01a,day01b) where
 
 import Data.Map (Map, insertLookupWithKey, empty)
 

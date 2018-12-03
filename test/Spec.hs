@@ -4,6 +4,7 @@ import Control.Exception (evaluate)
 
 import Day01
 import Day02
+import Day03
 
 
 main :: IO ()
@@ -28,3 +29,6 @@ main = hspec $ do
                              , "axcye"
                              , "wvxyz"
                              ] `shouldBe` "fgij"
+    describe "Day 3" $ do
+        it "Part A" $ day03a "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 4
+        it "Part B" $ day03b "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 3 
