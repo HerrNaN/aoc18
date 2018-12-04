@@ -5,6 +5,7 @@ import Control.Exception (evaluate)
 import Day01
 import Day02
 import Day03
+import Day04
 
 
 main :: IO ()
@@ -31,4 +32,9 @@ main = hspec $ do
                              ] `shouldBe` "fgij"
     describe "Day 3" $ do
         it "Part A" $ day03a "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 4
-        it "Part B" $ day03b "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 3 
+        it "Part B" $ day03b "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 3
+    describe "Day 4" $ do
+        it "Part A" $ do
+            example <- readFile "example04.txt"
+            day04a example `shouldBe` 240
+        it "Part B" $ day04b `shouldBe` ()
