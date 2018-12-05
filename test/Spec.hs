@@ -6,6 +6,7 @@ import Day01
 import Day02
 import Day03
 import Day04
+import Day05
 
 
 main :: IO ()
@@ -31,13 +32,23 @@ main = hspec $ do
                              , "wvxyz"
                              ] `shouldBe` "fgij"
     describe "Day 3" $ do
-        it "Part A" $ day03a "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 4
-        it "Part B" $ day03b "#1 @ 1,3: 4x4\n#2 @ 3,1: 4x4\n#3 @ 5,5: 2x2" `shouldBe` 3
+        
+        it "Part A" $ do 
+            example <- readFile "ex03.txt"
+            day03a example `shouldBe` 4
+        it "Part B" $ do
+            example <- readFile "ex03.txt"
+            day03b example `shouldBe` 3
+
     describe "Day 4" $ do 
         
         it "Part A" $ do
-            example <- readFile "example04.txt"
+            example <- readFile "ex04.txt"
             day04a example `shouldBe` 240
         it "Part B" $ do
-            example <- readFile "example04.txt"
+            example <- readFile "ex04.txt"
             day04b example `shouldBe` 4455
+    
+    describe "Day 5" $ do
+        it "Part A" $ day05a "dabAcCaCBAcCcaDA" `shouldBe` 10
+        it "Part B" $ day05b "dabAcCaCBAcCcaDA" `shouldBe` 4
