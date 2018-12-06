@@ -7,6 +7,7 @@ import Day02
 import Day03
 import Day04
 import Day05
+import Day06
 
 
 main :: IO ()
@@ -52,3 +53,7 @@ main = hspec $ do
     describe "Day 5" $ do
         it "Part A" $ day05a "dabAcCaCBAcCcaDA" `shouldBe` 10
         it "Part B" $ day05b "dabAcCaCBAcCcaDA" `shouldBe` 4
+    
+    describe "Day 6" $ do
+        it "Part A" $ day06a "1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9" `shouldBe` 17
+        it "Part B" $ day06b "1, 1\n1, 6\n8, 3\n3, 4\n5, 5\n8, 9" 32 `shouldBe` 16

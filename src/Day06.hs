@@ -64,4 +64,13 @@ day06a :: String -> Int
 day06a s = maximum $ map length $ group $ sort $ catMaybes $ finiteAreas (markedGrid ps) ps
     where ps = parseInput s
 
-day06b = undefined
+
+safeRegion :: Int -> [Pos] -> [Pos] -> [Pos]
+safeRegion rad grd pts = filter ((<rad) . sumManhattans pts) grd
+
+sumManhattans :: [Pos] -> Pos -> Int
+sumManhattans pts p = sum $ map (manhattan p) pts 
+
+day06b :: String -> Int -> Int
+day06b s n = length $ safeRegion n (grid ps) ps
+    where ps = parseInput s

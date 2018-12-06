@@ -1,9 +1,9 @@
 module Main where
 
 import Lib
-import Day03
+import Day06
 
 main :: IO ()
 main = do
-    s2 <- show <$> (day03b <$> readFile "day03.txt")
-    putStrLn s2
+    input <- readFile "day06.txt"
+    print (day06b input 10000)
