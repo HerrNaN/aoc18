@@ -2,15 +2,14 @@ module Day01 (day01a,day01b) where
 
 import Data.Map (Map, insertLookupWithKey, empty)
 
--- Reads a file with formatted input and returns
--- a list with frequency changes.
-readFreqs :: FilePath -> IO [Int]
-readFreqs f = map (read . dropWhile (=='+')) . lines <$> readFile f
+-- Parses the input.
+parseInput :: String -> [Int]
+parseInput = map (read . dropWhile (=='+')) . lines
 
 -- Solves the first part of the puzzle given a
 -- valid input at 'f'.
-day01a :: [Int] -> Int
-day01a = sum 
+day01a :: String -> Int
+day01a s = sum . map (read . dropWhile (=='+')) $ lines s
 
 -- Counts the number of occurances of values for each frequency change
 -- and return the first value that occur twice.
@@ -22,5 +21,6 @@ firstRepeat p m o (f:fs) = if v == Just 1 then p else firstRepeat (p+f) m' o fs
 
 -- Solves the second part of the puzzle given a
 -- valid input at 'f'.
-day01b :: [Int] -> Int
-day01b is = firstRepeat 0 empty is is
+day01b :: String -> Int
+day01b s = firstRepeat 0 empty is is
+    where is = parseInput s

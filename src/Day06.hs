@@ -1,10 +1,11 @@
-module Day06 (day06a, day06b) where
+module Day06 (day06a, day06b, day06bTest) where
 
 import Data.List
 import Data.List.Split
 import Data.Ord (comparing)
 import Data.Function (on)
 import Data.Maybe
+import Control.Parallel.Strategies
 
 type Pos = (Int, Int)
 
@@ -46,7 +47,7 @@ away (x,y) n = [ (x + dx, y + dy) | dx <- [(-n)..n],
 
 
 markedGrid :: [Pos] -> [Maybe Pos]
-markedGrid ps = map (`nearest` ps) $ grid ps
+markedGrid ps = parMap rpar (`nearest` ps) $ grid ps
 
 grid :: [Pos] -> [Pos]
 grid ps = [(x', y') | x' <- [x..(x+w)], y' <- [y..(y+h)]]
@@ -64,13 +65,13 @@ day06a :: String -> Int
 day06a s = maximum $ map length $ group $ sort $ catMaybes $ finiteAreas (markedGrid ps) ps
     where ps = parseInput s
 
-
-safeRegion :: Int -> [Pos] -> [Pos] -> [Pos]
-safeRegion rad grd pts = filter ((<rad) . sumManhattans pts) grd
-
 sumManhattans :: [Pos] -> Pos -> Int
-sumManhattans pts p = sum $ map (manhattan p) pts 
+sumManhattans pts p = sum $ parMap rpar (manhattan p) pts 
 
-day06b :: String -> Int -> Int
-day06b s n = length $ safeRegion n (grid ps) ps
+day06b :: String -> Int
+day06b s = length $ filter ((<10000) . sumManhattans ps) $ grid ps
+    where ps = parseInput s
+
+day06bTest :: String -> Int
+day06bTest s = length $ filter ((<32) . sumManhattans ps) $ grid ps
     where ps = parseInput s

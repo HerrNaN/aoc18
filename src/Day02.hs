@@ -20,10 +20,11 @@ readInput :: FilePath -> IO [String]
 readInput f = lines <$> readFile f
 
 -- Solves the first part of the puzzle.
-day02a :: [String] -> Int
-day02a ss = sumBools dups * sumBools trips
+day02a :: String -> Int
+day02a s = sumBools dups * sumBools trips
     where sumBools = foldr ((+) . fromEnum) 0
           (dups,trips) = unzip $ map hasDupsOrTrips ss
+          ss = lines s
 
 -- Evaluates whether the two strings differ by
 -- exactly one character.
@@ -58,5 +59,5 @@ commonChars (x:xs) (y:ys) | x == y    = x : commonChars xs ys
                           | otherwise = commonChars xs ys
 
 -- Solves the second part of the puzzle.
-day02b :: [String] -> String
-day02b ss = uncurry commonChars $ diffPair ss
+day02b :: String -> String
+day02b s = uncurry commonChars $ diffPair $ lines s
