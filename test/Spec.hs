@@ -3,15 +3,17 @@ import Test.Hspec
 import Days
 
 main :: IO ()
-main = hspec $ describe "Advent of Code 2018" $ mapM_ testDay tests
+main = hspec $ describe "Advent of Code 2018" $ mapM_ testSolution tests
 
--- | A list of the examples given with their answers. They're given
--- | in the following format:
--- | 
--- | (Day, 
--- |   (solution for part a, example answer), 
--- |   (solution for part b, example answer)
--- | )
+{-| 
+  A list of the examples given with their answers. They're given
+  in the following format:
+   
+  (Day, 
+    (solution for part a, example answer), 
+    (solution for part b, example answer)
+  )
+-}
 tests :: [(Int, (String -> String, String), (String -> String, String))]
 tests = [(1,  (show . day01a, "3"),   (show . day01b, "2"))
         ,(2,  (show . day02a, "12"),  (day02b, "abcde"))
@@ -23,8 +25,8 @@ tests = [(1,  (show . day01a, "3"),   (show . day01b, "2"))
         ]
 
 -- | Runs the tests a given entry in the tests list.
-testDay :: (Int, (String -> String, String), (String -> String, String)) -> Spec
-testDay (n, (partA, ansA), (partB, ansB)) = 
+testSolution :: (Int, (String -> String, String), (String -> String, String)) -> Spec
+testSolution (n, (partA, ansA), (partB, ansB)) = 
     context ("Day " ++ show n) $ do
         it "Part A" $ do 
             ex <- readEx n
