@@ -20,7 +20,7 @@ manhattan :: Pos -> Pos -> Int
 manhattan (x,y) (x',y') = abs (x'-x) + abs (y'-y)
 
 boundary :: [Pos] -> (Pos, Int, Int)
-boundary ps = ((minX, minY), maxX - minX, maxY - minY)
+boundary ps = ((minX - 1, minY-1), maxX - minX + 2, maxY - minY +2)
     where minX = fst $ minimumBy (compare `on` fst) ps
           maxX = fst $ maximumBy (compare `on` fst) ps
           minY = snd $ minimumBy (compare `on` snd) ps
@@ -60,7 +60,8 @@ finiteAreas areas ps = areas \\ infAreas
           ((x,y), w, h) = boundary ps
           infAreas = map (`nearest` ps) frame
 
-day06a :: [Pos] -> Int
-day06a ps = maximum $ map length $ group $ sort $ catMaybes $ finiteAreas (markedGrid ps) ps
+day06a :: String -> Int
+day06a s = maximum $ map length $ group $ sort $ catMaybes $ finiteAreas (markedGrid ps) ps
+    where ps = parseInput s
 
 day06b = undefined
