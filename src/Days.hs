@@ -5,7 +5,7 @@ module Days (
    ,day04a, day04b
    ,day05a, day05b
    ,day06a, day06b, day06bTest
-   ,day07a, day07b
+   ,day07a, day07b, day07bTest
 ) where
 
 import Day01
