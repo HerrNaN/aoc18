@@ -59,16 +59,14 @@ parTrav vs ws offset workerMax t | null ws' = t
           idleWorkers = workerMax - length working
           working     = filter ((/=0) . snd) ws
 
+solve07b :: String -> Int -> Int -> Int
+solve07b s offs workerMax = parTrav vs' [] offs workerMax 0
+    where vs = parseInput s
+          vs' = vs ++ [(f, 'e') | f <- fs]
+          fs = findEnds vs
 
 day07b :: String -> Int
-day07b s = parTrav vs' [] 60 5 0
-    where vs = parseInput s
-          vs' = vs ++ [(f, 'e') | f <- fs]
-          fs = findEnds vs
-
+day07b s = solve07b s 60 5
 
 day07bTest :: String -> Int
-day07bTest s = parTrav vs' [] 0 2 0
-    where vs = parseInput s
-          vs' = vs ++ [(f, 'e') | f <- fs]
-          fs = findEnds vs
+day07bTest s = solve07b s 0 2
