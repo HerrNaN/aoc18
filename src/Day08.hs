@@ -11,11 +11,9 @@ parseInput s = fst $ getNode $ map (read::String->Int) $ splitOn " " s
 
 -- | Gets the outermost Node from the input.
 getNode :: [Int] -> (Node, [Int])
-getNode (c:m:b) | c == 0    = (Node (c,m) [] ms, b')
-                | otherwise = (Node (c,m) cs ms', b'') 
-    where (ms, b') = splitAt m b
-          (ms', b'') = splitAt m rem
-          (cs, rem) = getChildren c b []
+getNode (0:m:b) = (Node (0,m) [] (take m b),  drop m b)
+getNode (c:m:b) = (Node (c,m) cs (take m b'), drop m b') 
+    where (cs, b') = getChildren c b []
 
 -- | Gets a given amount of Nodes as children.
 getChildren :: Int -> [Int] -> [Node] -> ([Node], [Int])
