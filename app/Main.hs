@@ -13,13 +13,14 @@ main = mapM_ printSolution solutions
 -}
 solutions :: [(Int, String -> String, String -> String)]
 solutions = [
-            --  (1, show . day01a, show . day01b)
-            -- ,(2, show . day02a, show . day02b)
-            -- ,(3, show . day03a, show . day03b)
-            -- ,(4, show . day04a, show . day04b)
-            -- ,(5, show . day05a, show . day05b)
-            -- ,(6, show . day06a, show . day06b)
-            (7, show . day07a, show . day07b)
+             (1, show . day01a, show . day01b)
+            ,(2, show . day02a, show . day02b)
+            ,(3, show . day03a, show . day03b) -- Warning: Slow!
+            ,(4, show . day04a, show . day04b)
+            ,(5, show . day05a, show . day05b)
+            ,(6, show . day06a, show . day06b)
+            ,(7, show . day07a, show . day07b)
+             (8, show . day08a, show . day08b)
              ]
 
 -- | Formats the solution outputs for a given day in a nice way.
