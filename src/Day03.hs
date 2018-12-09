@@ -5,7 +5,8 @@ module Day03
 
 import Data.List 
 import Data.List.Split
-import Data.Map (fromListWith, toList)
+import Data.Map (Map)
+import qualified Data.Map as M 
 import Data.Maybe
 
 type Point = (Int, Int)
@@ -14,7 +15,7 @@ data Claim = Claim {cid :: Int, pos :: Point, width :: Int, height :: Int}
 
 -- Counts the occurances of each element.
 frequency :: (Ord a) => [a] -> [(a,Int)]
-frequency xs = toList (fromListWith (+) [(x,1) | x <- xs])
+frequency xs = M.toList (M.fromListWith (+) [(x,1) | x <- xs])
 
 -- Collects all Claims from a string.
 getAllClaims :: String -> [Claim]
@@ -47,21 +48,15 @@ day03a s = length . filter ((>1) . snd) $ frequency points
         where claims = getAllClaims s
               points = concatMap getPoints claims
 
--- Find the Claim disjunct from the rest of the Claims
-findNoOverlap :: [Claim] -> Maybe Claim
-findNoOverlap cs = findNoOverlap' cs cs
+findNoOverlap :: [Claim] -> Claim
+findNoOverlap cs = findNoOverlap' cs m
+    where pts = [(p,1) | p <- concat [getPoints c | c <- cs]]
+          m   = M.fromListWith (+) pts
 
-findNoOverlap' :: [Claim] -> [Claim] -> Maybe Claim
-findNoOverlap' _   []     = Nothing
-findNoOverlap' cs' (c:cs) | isDisjunct = Just c
-                          | otherwise = findNoOverlap' cs' disjuncts
-    where isDisjunct = and [disjunct c c' | c' <- cs', c' /= c]
-          disjuncts   = filter (disjunct c) cs
-
--- Determins if two Claims are disjunct
-disjunct :: Claim -> Claim -> Bool
-disjunct c1 c2 = null $ getPoints c1 `intersect` getPoints c2
+findNoOverlap' :: [Claim] -> Map Point Int -> Claim
+findNoOverlap' (c:cs) m | all (== 1) [m M.! p | p <- getPoints c] = c
+                        | otherwise = findNoOverlap' cs m
 
 -- Solves the second part of the puzzle
 day03b :: String -> Int
-day03b s = maybe (-1) cid (findNoOverlap (getAllClaims s))
+day03b s = cid $ findNoOverlap $ getAllClaims s
