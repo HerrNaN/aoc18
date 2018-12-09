@@ -45,30 +45,22 @@ your input, make sure you get the whole thing.)
 
 module Day05 (day05a, day05b) where
 
+import Data.Bits
 import Data.Char
 
--- | Goes through and removes the first pair of units that have the
--- | same type but the opposite polarity.
-removePolymersSweep :: String -> String
-removePolymersSweep []        = []
-removePolymersSweep [c]       = [c]
-removePolymersSweep (c:c':cs) | willReact c c' = removePolymersSweep cs
-                              | otherwise      = c : removePolymersSweep (c':cs)
-
--- | Reduces the polymer to a stable state.
-removePolymers :: String -> String
-removePolymers [] = []
-removePolymers s  | s == s'   = s
-                  | otherwise = removePolymers s'
-    where s' = removePolymersSweep s
+removePolymers :: String -> String -> String
+removePolymers []     ps'      = ps' 
+removePolymers (p:ps) []       = removePolymers ps [p]
+removePolymers (p:ps) (p':ps') | willReact p p' = removePolymers ps ps'
+                               | otherwise      = removePolymers ps (p:p':ps')
 
 -- | Checks wether to units will react.
 willReact :: Char -> Char -> Bool
-willReact c c' = toLower c == toLower c' && c /= c'
+willReact c c' = ord c `xor` ord c' == 32
 
 -- | Solve the first part of the puzzle.
 day05a :: String -> Int
-day05a s = length $ removePolymers s
+day05a s = length $ removePolymers s []
 
 {-
 --- Part Two ---
@@ -98,5 +90,5 @@ What is the length of the shortest polymer you can produce by removing all units
 
 -- | Solves the second part of the puzzle.
 day05b :: String -> Int
-day05b polymer = minimum $ map (length . removePolymers) [deleteAllOfType t polymer | t <- ['a'..'z']]
+day05b polymer = minimum $ map (\p -> length $ removePolymers p []) [deleteAllOfType t polymer | t <- ['a'..'z']]
     where deleteAllOfType t p = [t' | t' <- p, t' /= t, t' /= toUpper t]
