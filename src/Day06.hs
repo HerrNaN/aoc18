@@ -25,25 +25,10 @@ boundary ps = ((minX - 1, minY-1), maxX - minX + 2, maxY - minY +2)
           maxX = fst $ maximumBy (compare `on` fst) ps
           minY = snd $ minimumBy (compare `on` snd) ps
           maxY = snd $ maximumBy (compare `on` snd) ps
-
-nearest :: Pos -> [Pos] -> Maybe Pos
-nearest p ps | p `elem` ps = Just p
-             | otherwise   = nearest' p ps 0
-
-nearest' :: Pos -> [Pos] -> Int -> Maybe Pos
-nearest' p ps n | neighbours > 1  = Nothing
-                | neighbours == 1 = Just (head nAway)
-                | otherwise       = nearest' p ps $ n + 1
-    where nAway = filter (`elem` ps) $ away p n
-          neighbours = length nAway
           
-
-
-away :: Pos -> Int -> [Pos]
-away (x,y) n = [ (x + dx, y + dy) | dx <- [(-n)..n], 
-                                    dy <- [(-n)..n], 
-                                    manhattan (x,y) (x + dx, y + dy) == n]
-
+nearest :: Pos -> [Pos] -> Maybe Pos
+nearest p ps = if d == d' then Nothing else Just p1
+    where ((p1, d):(_, d'):ns) = sortOn snd [(p', manhattan p p') | p' <- ps]
 
 markedGrid :: [Pos] -> [Maybe Pos]
 markedGrid ps = map (`nearest` ps) $ grid ps

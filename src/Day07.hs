@@ -1,10 +1,8 @@
 module Day07 (day07a, day07b, day07bTest) where
 
-import Data.List (map, (\\), filter, null, sort, nub)
+import Data.List
 import Data.Map (Map)
-import qualified Data.Map as Map
 import Data.Char
-import Debug.Trace
 
 {-# ANN module "HLint: ignore Use String" #-}
 
