@@ -26,6 +26,7 @@ dependencies:
 - hspec
 - QuickCheck
 - split
+- MissingH
 
 library:
   source-dirs: src

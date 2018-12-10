@@ -24,6 +24,7 @@ tests = [(1,  (show . day01a, "3"),   (show . day01b, "2"))
         ,(7,  (day07a, "CABDFE"),     (show . day07bTest, "15"))
         ,(8,  (show . day08a, "138"), (show . day08b, "66"))
         ,(9,  (show . day09a, "8317"),(show . day09a, "8317")) -- Same for a and b
+        ,(10, (day10a, day10aTestSol),(show . day10b, "3"))
         ]
 
 -- | Runs the tests a given entry in the tests list.
@@ -41,3 +42,12 @@ testSolution (n, (partA, ansA), (partB, ansB)) =
 readEx :: Int -> IO String
 readEx day = readFile $ "examples/day" ++ day' ++ ".txt"
     where day' = if day < 10 then "0" ++ show day else show day
+
+day10aTestSol = "#...#..###\n\ 
+                \#...#...#.\n\
+                \#...#...#.\n\
+                \#####...#.\n\
+                \#...#...#.\n\
+                \#...#...#.\n\
+                \#...#...#.\n\
+                \#...#..###\n"

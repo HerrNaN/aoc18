@@ -22,6 +22,7 @@ solutions = [
             ,(7, show . day07a, show . day07b)
             ,(8, show . day08a, show . day08b)
             ,(9, show . day09a, show . day09b)
+            ,(10,       day10a, show . day10b)
              ]
 
 -- | Formats the solution outputs for a given day in a nice way.
