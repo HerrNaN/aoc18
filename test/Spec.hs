@@ -25,6 +25,7 @@ tests = [(1,  (show . day01a, "3"),   (show . day01b, "2"))
         ,(8,  (show . day08a, "138"), (show . day08b, "66"))
         ,(9,  (show . day09a, "8317"),(show . day09a, "8317")) -- Same for a and b
         ,(10, (day10a, day10aTestSol),(show . day10b, "3"))
+        ,(11, (show . day11a, "(33,45)"),(show . day11b, "(90,269,16)"))
         ]
 
 -- | Runs the tests a given entry in the tests list.

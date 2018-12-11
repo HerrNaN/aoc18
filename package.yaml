@@ -51,5 +51,6 @@ tests:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
+    - -O
     dependencies:
     - aoc18
